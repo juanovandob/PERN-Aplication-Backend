@@ -1,0 +1,3 @@
+{"_id":{"$oid":"649e670083b0be55286c794c"},"title":"Prpppiedad 2","description":"desc 2","propertyType":"duplex","location":"Cordoba","price":{"$numberInt":"200"},"photo":"http://res.cloudinary.com/dmxzcehyr/image/upload/v1688102655/dmn7iiiqe3gjg4fqya1y.png","creator":{"$oid":"649d02370bc87a9f65454762"},"__v":{"$numberInt":"0"}}
+
+{"_id":{"$oid":"649f24ea02b7b943d24d79a8"},"title":"Propoieada 3","description":"propiedad 3","propertyType":"condos","location":"loc 3 modificaera","price":{"$numberInt":"333"},"photo":"http://res.cloudinary.com/dmxzcehyr/image/upload/v1688151274/shfidx5ohcusd0mckw1j.png","creator":{"$oid":"649d02370bc87a9f65454762"},"__v":{"$numberInt":"0"}}

@@ -1,0 +1,28 @@
+mongoDB_credentials
+
+*node_modules/
+
+/server/node_modules/
+
+# Logs
+logs
+*.log
+
+# Environment variables
+.env
+
+# Sequelize migrations
+/migrations/
+
+# Sequelize seeders
+/seeders/
+
+# Build output
+/dist/
+
+# Editor and IDE files
+.vscode/
+.idea/
+
+mern-dashboard-client/
+
