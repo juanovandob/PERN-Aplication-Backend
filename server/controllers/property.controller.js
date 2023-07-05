@@ -1,5 +1,7 @@
 import Property from '../db/models/property.js';
 import User from '../db/models/user.js';
+import sequelize from '../db/connect.js'; 
+
 
 import * as dotenv from 'dotenv';
 
@@ -15,37 +17,24 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET  
   });
 
-  //const getAllProperties = async () => { }
   const getPropertyDetail = async () => { }
-  const createProperty = async () => {}
+ // const createProperty = async () => {}
   const updateProperty = async () => {}
   const deleteProperty = async (req, res) => {}
 
-  
+ //working 
 const getAllProperties = async (req, res) => {
-    /* try {
-        const properties = await Property.find({}).limit(req.query._end);
-        const propertyCount = await Property.countDocuments({});
-        console.log(propertyCount);
-        res.status(200).json(properties);
-
-    } catch (error) {
-        res.status(500).json({ message: error.message});
-    } */
+    
     try {
         const limit = parseInt(req.query._end) || undefined; //limite de respuestas solicitadas
     
-        // Buscar todos los usuarios --User ya es una instancia de sequelize
-        //por eso responde a los métodos de sequelize
-        /* const properties = await Property.findAll({
-          limit,
-          raw: true, // Para obtener solo los datos sin metadata adicional
-        }); */
-
+        //regresa las propiedades y las cuenta. propiedades en properties y conteo en count
+        //destructuración
         const { rows: properties, count } = await Property.findAndCountAll({
             limit,
             raw: true, // Para obtener solo los datos sin metadata adicional
           });
+
         const propertyCount = count;    
         res.status(200).json(properties);
     } catch (error) {
@@ -67,43 +56,56 @@ const getAllProperties = async (req, res) => {
 
 
 
-/* const createProperty = async (req, res) => {
+const createProperty = async (req, res) => {
+    //Se crea una transacción - recomendable al operar dos tablas al mismo tiempo
     
+    //const t = await sequelize.transaction();
     try{
         const { title, description, propertyType, location, price, photo, email} = req.body;
+        //const { title, description, propertyType, location, price, email} = req.body;
 
-        //Start a new session . Mongoose property. To make Atomic the insertion
-        const session = await mongoose.startSession();
-        session.startTransaction();
+        const user = await User.findOne({
+            where: { email }, // Buscar por el campo email
+            //transaction: t, // Asociar la transacción a la consulta
+          });
+        console.log(email);
+        console.log(user.id);
+        console.log(req.body);
 
-        const user = await User.findOne({ email }).session(session);
-        
         if(!user) throw new Error('User not found');
 
         //Using cloudinary
         const photoUrl = await cloudinary.uploader.upload(photo);
-
-        const newProperty = await Property.create({
+        
+        
+        const newProperty ={
             title,
             description,
             propertyType,
             location,
             price,
             photo: photoUrl.url,
-            creator: user._id
-        }); 
+            creator_id: 4
+        }
+        //{ transaction: t } // Asociar la transacción a la creación de la propiedad
+        //); 
 
-        //update del dato creado
-        user.allProperties.push(newProperty._id);
-        await user.save({ session});
+        const propertyCreated = await Property.create(newProperty);
+        
 
-        await session.commitTransaction();
+        //update del dato creado - se envia el id de la propiedad al campo allProperties de user. en user es un array
+        //user.allProperties.push(propertyCreated.id);
+        //await user.save();
+
+        //await t.commit(); // Confirmar la transacción si todo ha ido bien
+        
         //response
         res.status(200).json({ message: 'Property created sucessfully' });
     }catch(error){
+        //await t.rollback(); // Deshacer la transacción en caso de error
         res.status(500).json({ message: error.message});
     };
- };  */
+ };
 
 
 

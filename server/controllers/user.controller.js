@@ -26,7 +26,7 @@ const createUser = async (req, res) => {
         const { name, email, avatar} = req.body;
 
         const userExists = await User.findOne({ where: { email }});
-        console.log(email);
+        //console.log(email);
         
         if(userExists){
             return res.status(200).json(userExists);
@@ -37,7 +37,7 @@ const createUser = async (req, res) => {
             email,
             avatar,
         });
-
+        
         res.status(200).json(newUser); 
     }catch(error){
         res.status(500).json({ message: error.message })
