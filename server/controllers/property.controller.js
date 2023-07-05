@@ -122,62 +122,16 @@ const createProperty = async (req, res) => {
 
 
  const updateProperty = async (req, res) => {
-    /* try {
-        const { id } = req.params;
-        const { title, description, propertyType, location, price, photo } = req.body;
-        
-        
-        await Property.findByIdAndUpdate(
-            { _id: id },
-            {
-                title,
-                description,
-                propertyType,
-                location,
-                price,
-                photo: photoUrl.url || photo,
-            },
-            );
-            
-            res.status(200).json({ message: "Property updated successfully" });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        } */
-        ///++++++++
-       /*  try {
-        
-        const photoUrl = await cloudinary.uploader.upload(photo);
-        const { id, title, description, propertyType, location, price, photo } = req.body;
-      
-        // Buscar la propiedad por su ID
-        const propertyToUpdate = await Property.findByPk(id);
-      
-        if (!propertyToUpdate) {
-          throw new Error('Property not found');
-        }
-      
-        // Actualizar los campos de la propiedad
-        propertyToUpdate.title = title;
-        propertyToUpdate.description = description;
-        propertyToUpdate.propertyType = propertyType;
-        propertyToUpdate.location = location;
-        propertyToUpdate.price = price;
-        propertyToUpdate.photo = photoUrl.url || photo;
-      
-        // Guardar los cambios en la base de datos
-        await propertyToUpdate.save();
-      
-        res.status(200).json({ message: 'Property updated successfully' });
-      } catch (error) {
-        res.status(500).json({ message: error.message });
-      } */
-    //++++++
     try {
-        //+++++++ mejora
-        /* const updates = req.body;
+        //+++++++ mejora -- En el body se puede enviar solo los cambios que se desean y la función reconocer
+        //cauales se envian y hace los cambios solo en ellos
+        const { id } = req.params; 
+        const updates = req.body;
 
-        //const originalProperty = await Property.findByPk(req.body.id);
+        const originalProperty = await Property.findByPk(id);
 
+        //En esta parte se filtra que datos se recibieron y se forma el objeto con los datos a actualizar
+        //sin un campo es enviado pero vacio.. entonces no se actualiza - por el no null de la base de datos
         const fieldsToUpdate = ['title', 'description', 'propertyType', 'location', 'price', 'photo'];
         const updatedFields = {};
 
@@ -188,7 +142,7 @@ const createProperty = async (req, res) => {
         });
 
          // Actualizar los campos modificados en la base de datos
-        const [updatedRows] = await Property.update(updateObject, {
+        const [updatedRows] = await Property.update(updatedFields, {
             where: { id },
         });
 
@@ -201,12 +155,15 @@ const createProperty = async (req, res) => {
         res.status(200).json({
             original: originalProperty,
             updated: updatedProperty,
-          }); */
+          }); 
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 
 
-
-        //++++ 
-        const { id } = req.params;  
+        //++++ Funciona pero sin filtras que datos se envian desde el request.
+        //try {
+        /* const { id } = req.params;  
         const { title, description, propertyType, location, price, photo } = req.body;
         console.log(req.body);
         
@@ -243,7 +200,7 @@ const createProperty = async (req, res) => {
         //res.status(200).json({ message: 'Property updated successfully' });
       } catch (error) {
         res.status(500).json({ message: error.message });
-      }
+      } */
 
     //+++++++++
 }; 
