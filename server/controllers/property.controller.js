@@ -18,9 +18,6 @@ cloudinary.config({
   });
 
 
-const updateProperty = async () => {}
-
-
  //working 
 const getAllProperties = async (req, res) => {
     
@@ -124,14 +121,12 @@ const createProperty = async (req, res) => {
 
 
 
- /* const updateProperty = async (req, res) => {
-    try {
+ const updateProperty = async (req, res) => {
+    /* try {
         const { id } = req.params;
-        const { title, description, propertyType, location, price, photo } =
-            req.body;
-
-        const photoUrl = await cloudinary.uploader.upload(photo);
-
+        const { title, description, propertyType, location, price, photo } = req.body;
+        
+        
         await Property.findByIdAndUpdate(
             { _id: id },
             {
@@ -142,13 +137,116 @@ const createProperty = async (req, res) => {
                 price,
                 photo: photoUrl.url || photo,
             },
-        );
-
-        res.status(200).json({ message: "Property updated successfully" });
-    } catch (error) {
+            );
+            
+            res.status(200).json({ message: "Property updated successfully" });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        } */
+        ///++++++++
+       /*  try {
+        
+        const photoUrl = await cloudinary.uploader.upload(photo);
+        const { id, title, description, propertyType, location, price, photo } = req.body;
+      
+        // Buscar la propiedad por su ID
+        const propertyToUpdate = await Property.findByPk(id);
+      
+        if (!propertyToUpdate) {
+          throw new Error('Property not found');
+        }
+      
+        // Actualizar los campos de la propiedad
+        propertyToUpdate.title = title;
+        propertyToUpdate.description = description;
+        propertyToUpdate.propertyType = propertyType;
+        propertyToUpdate.location = location;
+        propertyToUpdate.price = price;
+        propertyToUpdate.photo = photoUrl.url || photo;
+      
+        // Guardar los cambios en la base de datos
+        await propertyToUpdate.save();
+      
+        res.status(200).json({ message: 'Property updated successfully' });
+      } catch (error) {
         res.status(500).json({ message: error.message });
-    }
-}; */
+      } */
+    //++++++
+    try {
+        //+++++++ mejora
+        /* const updates = req.body;
+
+        //const originalProperty = await Property.findByPk(req.body.id);
+
+        const fieldsToUpdate = ['title', 'description', 'propertyType', 'location', 'price', 'photo'];
+        const updatedFields = {};
+
+        fieldsToUpdate.forEach(field => {
+        if (updates[field]) {
+            updatedFields[field] = updates[field];
+        }
+        });
+
+         // Actualizar los campos modificados en la base de datos
+        const [updatedRows] = await Property.update(updateObject, {
+            where: { id },
+        });
+
+        if (updatedRows === 0) {
+            throw new Error('Property not found');
+        }
+
+        const updatedProperty = await Property.findByPk(id);
+
+        res.status(200).json({
+            original: originalProperty,
+            updated: updatedProperty,
+          }); */
+
+
+
+        //++++ 
+        const { id } = req.params;  
+        const { title, description, propertyType, location, price, photo } = req.body;
+        console.log(req.body);
+        
+        const originalProperty = await Property.findByPk(id);
+        
+        //const photoUrl = await cloudinary.uploader.upload(photo);
+        // Actualizar la propiedad en la base de datos
+        const updatedRows = await Property.update(
+          {
+            title,
+            description,
+            propertyType,
+            location,
+            price,
+            photo,
+            //photo: photoUrl.url || photo,
+          },
+          {
+            where: { id },
+          }
+        );
+      
+        if (updatedRows[0] === 0) {
+          throw new Error('Property not found');
+        }
+
+        const updatedProperty = await Property.findByPk(id);
+
+        res.status(200).json({
+            original: originalProperty,
+            updated: updatedProperty,
+          });
+      
+        //res.status(200).json({ message: 'Property updated successfully' });
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+
+    //+++++++++
+}; 
 
 
 //Falta borrar el dato del array que está en usuario ...
