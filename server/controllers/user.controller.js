@@ -1,4 +1,5 @@
 import User from '../db/models/user.js';
+import Property from '../db/models/property.js';
 
 //ready
 const getAllUsers = async (req, res) => {
@@ -52,7 +53,9 @@ const getUserInfoByID = async (req, res) => {
         // Buscar el usuario por su ID en Sequelize
         const user = await User.findOne({
           where: { id }, // Buscar por el campo 'id' en lugar de '_id'
+          //include: [{ model: Property, as: "allProperties" }],
         });
+        console.log(user);
     
         if (user) {
           res.status(200).json(user);

@@ -15,15 +15,15 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET  
   });
 
-  const getAllProperties = async () => { }
+  //const getAllProperties = async () => { }
   const getPropertyDetail = async () => { }
   const createProperty = async () => {}
   const updateProperty = async () => {}
   const deleteProperty = async (req, res) => {}
 
   
-/* const getAllProperties = async (req, res) => {
-    try {
+const getAllProperties = async (req, res) => {
+    /* try {
         const properties = await Property.find({}).limit(req.query._end);
         const propertyCount = await Property.countDocuments({});
         console.log(propertyCount);
@@ -31,8 +31,27 @@ cloudinary.config({
 
     } catch (error) {
         res.status(500).json({ message: error.message});
-    }
- }; */
+    } */
+    try {
+        const limit = parseInt(req.query._end) || undefined; //limite de respuestas solicitadas
+    
+        // Buscar todos los usuarios --User ya es una instancia de sequelize
+        //por eso responde a los métodos de sequelize
+        /* const properties = await Property.findAll({
+          limit,
+          raw: true, // Para obtener solo los datos sin metadata adicional
+        }); */
+
+        const { rows: properties, count } = await Property.findAndCountAll({
+            limit,
+            raw: true, // Para obtener solo los datos sin metadata adicional
+          });
+        const propertyCount = count;    
+        res.status(200).json(properties);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+      }    
+ };
 
 /*  const getPropertyDetail = async (req, res) => {
     const { id } = req.params;
