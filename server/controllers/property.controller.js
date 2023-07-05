@@ -85,20 +85,18 @@ const createProperty = async (req, res) => {
             location,
             price,
             photo: photoUrl.url,
-            creator_id: 4
+            creator_id: user.id
         }
-        //{ transaction: t } // Asociar la transacción a la creación de la propiedad
-        //); 
-
+        
         const propertyCreated = await Property.create(newProperty);
-        
 
-        //update del dato creado - se envia el id de la propiedad al campo allProperties de user. en user es un array
-        //user.allProperties.push(propertyCreated.id);
-        //await user.save();
+        // Agregar el id de la propiedad al campo allProperties de user (es un array)
+        //sequelize crea de nuevo el array por eso el sprea operator, para copiar el array y agregar al final el nuevo id
+        await user.update({
+            allProperties: [...user.allProperties, propertyCreated.id],
+        });
 
-        //await t.commit(); // Confirmar la transacción si todo ha ido bien
-        
+      
         //response
         res.status(200).json({ message: 'Property created sucessfully' });
     }catch(error){
