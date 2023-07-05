@@ -45,19 +45,24 @@ const createUser = async (req, res) => {
 
 
 const getUserInfoByID = async (req, res) => {
+    
     try {
         const { id } = req.params;
-
-        const user = await User.findOne({ _id: id }).populate("allProperties");
-
+    
+        // Buscar el usuario por su ID en Sequelize
+        const user = await User.findOne({
+          where: { id }, // Buscar por el campo 'id' en lugar de '_id'
+        });
+    
         if (user) {
-            res.status(200).json(user);
+          res.status(200).json(user);
         } else {
-            res.status(404).json({ message: "User not found" });
+          res.status(404).json({ message: "User not found" });
         }
-    } catch (error) {
+      } catch (error) {
         res.status(500).json({ message: error.message });
-    }
+      }
+    
 };
 
 export {

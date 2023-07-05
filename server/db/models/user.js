@@ -20,7 +20,12 @@ const User = sequelize.define('users', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-}, {
+  allProperties: {
+    type: DataTypes.ARRAY(DataTypes.STRING), // Tipo de dato ARRAY de tipo STRING
+    defaultValue: [], // Valor predeterminado: un arreglo vacío
+    allowNull: true,
+  },
+  }, {
   // Opciones adicionales del modelo
   freezeTableName: true, // Esta opción congela el nombre de la tabla tal como está definido en el modelo
 });

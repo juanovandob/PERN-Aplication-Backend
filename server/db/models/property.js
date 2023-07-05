@@ -2,7 +2,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from "../connect.js";  //connect to database
 
-const propertyModel = sequelize.define('properties', {
+const Property = sequelize.define('properties', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -48,6 +48,6 @@ const propertyModel = sequelize.define('properties', {
 //module.exports = propertyModel;
 //propertyModel.sync();
 
-export default propertyModel;
+export default Property;
 
 

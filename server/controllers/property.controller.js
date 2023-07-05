@@ -1,8 +1,6 @@
 import Property from '../db/models/property.js';
 import User from '../db/models/user.js';
 
-import mongoose from "mongoose";
-//import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
 //cloudinary
