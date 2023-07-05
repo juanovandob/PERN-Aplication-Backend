@@ -17,8 +17,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET  
   });
 
-  const getPropertyDetail = async () => { }
- // const createProperty = async () => {}
+  //const getPropertyDetail = async () => { }
   const updateProperty = async () => {}
   const deleteProperty = async (req, res) => {}
 
@@ -42,20 +41,39 @@ const getAllProperties = async (req, res) => {
       }    
  };
 
-/*  const getPropertyDetail = async (req, res) => {
-    const { id } = req.params;
-   
-    const propertyExists = await Property.findOne({ _id: id }).populate("creator", );
-
-    if (propertyExists) {
-        res.status(200).json(propertyExists);
-    } else {
-        res.status(404).json({ message: "Property not found" });
+//working with postman 
+const getPropertyDetail = async (req, res) => {
+    try{
+        const { id } = req.params;
+    
+        /**
+         * IMPORTANTE: Ejemplo de un join, trae los datos de la propiedad que se busca, ademas de todos
+         * los datos de la tabla usuario (que es su creador) en el modelo property.js se generó una
+         * relación al final del model (belongs), con esa relación se pudo hacer el join, el join se
+         * hace con include: -- Si no se utiliza así solo se obtiene el id del creador.
+         */
+        // find property by ID - Sequelize
+        const propertyExists = await Property.findOne({
+            where: { id },
+            include: [{ model: User, as: 'creator' }], 
+        });
+        //const user = await User.findOne({
+        //    where: { id }, // Buscar por el campo 'id' en lugar de '_id'
+            //include: [{ model: Property, as: "allProperties" }],
+        //  });
+        
+        if (propertyExists) {
+            res.status(200).json(propertyExists);
+        } else {
+            res.status(404).json({ message: "Property not found" });
+        }
+    }catch(error){
+        res.status(404).json({ message: error });
     }
-}; */
+};
 
 
-
+//working 
 const createProperty = async (req, res) => {
     //Se crea una transacción - recomendable al operar dos tablas al mismo tiempo
     
@@ -95,7 +113,6 @@ const createProperty = async (req, res) => {
         await user.update({
             allProperties: [...user.allProperties, propertyCreated.id],
         });
-
       
         //response
         res.status(200).json({ message: 'Property created sucessfully' });

@@ -44,7 +44,7 @@ const createUser = async (req, res) => {
     }
 };
 
-
+//funciona en postman  -- falta en el front 
 const getUserInfoByID = async (req, res) => {
     
     try {
@@ -55,8 +55,7 @@ const getUserInfoByID = async (req, res) => {
           where: { id }, // Buscar por el campo 'id' en lugar de '_id'
           //include: [{ model: Property, as: "allProperties" }],
         });
-        console.log(user);
-    
+            
         if (user) {
           res.status(200).json(user);
         } else {

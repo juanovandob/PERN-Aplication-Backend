@@ -1,6 +1,7 @@
 // models/Property.js
 import { DataTypes } from 'sequelize';
 import sequelize from "../connect.js";  //connect to database
+import User from './user.js';
 
 const Property = sequelize.define('properties', {
   id: {
@@ -45,9 +46,9 @@ const Property = sequelize.define('properties', {
   freezeTableName: true, // Esta opción congela el nombre de la tabla tal como está definido en el modelo
 });
 
-//module.exports = propertyModel;
-//propertyModel.sync();
+Property.belongsTo(User, { foreignKey: 'creator_id', as: 'creator' });
 
+//module.exports = propertyModel;
 export default Property;
 
 
