@@ -1,6 +1,7 @@
 // models/User.js
 import { DataTypes } from 'sequelize';
-import sequelize from '../connect.js'; 
+import sequelize from '../connect.js';
+//import Property from './property.js'; 
 
 const User = sequelize.define('users', {
   id: {
@@ -29,6 +30,9 @@ const User = sequelize.define('users', {
   // Opciones adicionales del modelo
   freezeTableName: true, // Esta opción congela el nombre de la tabla tal como está definido en el modelo
 });
+
+//User.hasMany(Property, { foreignKey: 'creator_id', as: 'properties' });
+
 
 //module.exports = userModel; 
 //userModel.sync();

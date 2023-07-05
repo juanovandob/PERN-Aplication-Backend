@@ -1,7 +1,7 @@
 // models/Property.js
 import { DataTypes } from 'sequelize';
 import sequelize from "../connect.js";  //connect to database
-import User from './user.js';
+import User from "./user.js";
 
 const Property = sequelize.define('properties', {
   id: {

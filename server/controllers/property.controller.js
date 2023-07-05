@@ -17,9 +17,9 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET  
   });
 
-  //const getPropertyDetail = async () => { }
-  const updateProperty = async () => {}
-  const deleteProperty = async (req, res) => {}
+
+const updateProperty = async () => {}
+
 
  //working 
 const getAllProperties = async (req, res) => {
@@ -57,10 +57,13 @@ const getPropertyDetail = async (req, res) => {
             where: { id },
             include: [{ model: User, as: 'creator' }], 
         });
-        //const user = await User.findOne({
-        //    where: { id }, // Buscar por el campo 'id' en lugar de '_id'
-            //include: [{ model: Property, as: "allProperties" }],
-        //  });
+                
+        /*Esto lo puedo utilizar por si se deben separar properties y users 
+        const user = await User.findOne({
+            where: { id: userId }, 
+            raw: true,
+        });
+        */
         
         if (propertyExists) {
             res.status(200).json(propertyExists);
@@ -86,10 +89,7 @@ const createProperty = async (req, res) => {
             where: { email }, // Buscar por el campo email
             //transaction: t, // Asociar la transacción a la consulta
           });
-        console.log(email);
-        console.log(user.id);
-        console.log(req.body);
-
+        
         if(!user) throw new Error('User not found');
 
         //Using cloudinary
@@ -151,32 +151,40 @@ const createProperty = async (req, res) => {
 }; */
 
 
-
-/* const deleteProperty = async (req, res) => {
+//Falta borrar el dato del array que está en usuario ...
+//no está hecho de la forma más optima porque no se utiliza transacciones para todo
+const deleteProperty = async (req, res) => {
+    
     try {
         const { id } = req.params;
 
-        const propertyToDelete = await Property.findById({ _id: id }).populate(
-            "creator",
-        );
-        console.log(typeof(propertyToDelete));
-        if (!propertyToDelete) throw new Error("Property not found");
+        const propertyToDelete = await Property.findByPk(id, {
+          include: [{ model: User, as: 'creator' }],
+          //include: [{ model: User, as: 'creator' }],
+        });
+        console.log('property to be deleted id: ', propertyToDelete.id);
 
-        const session = await mongoose.startSession();
-        session.startTransaction();
+        if (!propertyToDelete) {
+          throw new Error('Property not found');
+        }
 
-        propertyToDelete.deleteOne({ session });
-        //propertyToDelete.remove({ session });  //version antigua de mongoose
-        propertyToDelete.creator.allProperties.pull(propertyToDelete);
+        //elimina la propiedad en cascada con la FK de usuario (creator)
+        await sequelize.transaction(async (transaction) => {
 
-        await propertyToDelete.creator.save({ session });
-        await session.commitTransaction();
+            await propertyToDelete.destroy({ transaction });
+            
+            await propertyToDelete.setCreator(null, { transaction });
 
-        res.status(200).json({ message: "Property deleted successfully" });
-    } catch (error) {
+
+            //await propertyToDelete.creator.removeProperty(propertyToDelete, {transaction,});
+            });
+    
+        res.status(200).json({ message: 'Property deleted successfully' });
+      } catch (error) {
         res.status(500).json({ message: error.message });
-    }
-}; */
+      }
+
+};
 
 export {
     getAllProperties,
