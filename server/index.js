@@ -8,6 +8,7 @@ import sequelize from './db/connect.js'; //Conexión a DB
 //Import Routes
 import userRouter from './routes/user.routes.js';
 import propertyRouter from './routes/property.routes.js';
+import metricsRouter from './routes/metrics.routes.js';
 
 dotenv.config();  //initialize dotenv
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) =>{
 //Se hace el llamado a los routes como middlewares
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/properties', propertyRouter);
+app.use('/api/v1/metrics', metricsRouter);
 
 const startServer = async () => {
     try {
