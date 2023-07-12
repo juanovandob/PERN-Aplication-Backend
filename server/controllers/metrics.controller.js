@@ -9,7 +9,76 @@ const getAllMetrics = async (req, res) => {
         res.status(500).json({ message: error.message });   
     }
  };
-const getMetricsDetail = async (req, res) => { };
+
+ //metrics detail by user
+const getMetricsDetail = async (req, res) => {
+  
+  const { id } = req.params;
+  
+  try {
+    const allMetrics = {};
+    // Check if user id exists
+    const userExists = await User.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if(userExists){
+      /* // Find properties by creator_id (id usuario propietario)
+      const properties = await Property.findAll({
+        where: { creator_id: id }, 
+        raw: true,
+      })*/;
+      const {count, rows} = await Property.findAndCountAll({
+        where: { creator_id: id },
+        attributes: ["id", "title"],
+        }) //return the count of objects and an ARRAY of objects
+
+      
+      //getting the count of properties with titles less than 12 characters
+      let totalUnhealthy = 0;
+      let propertiesUnhealthy = [];
+      let totalHealthy = 0;
+      let propertiesOk = [];
+
+      for(const property of rows){
+        if((property.title).length < 12){
+          totalUnhealthy ++;
+          propertiesUnhealthy.push(property);
+        }else{
+        totalHealthy++;
+        propertiesOk.push(property);
+        }
+      }  
+
+      console.log('conteo', totalUnhealthy);
+
+      const allMetrics = {
+        totalProperties: {
+          type: String,
+          value: count,
+        },
+        titleQuality: {
+          totalUnhealthy,
+          propertiesUnhealthy,
+          totalHealthy,
+          propertiesHealthy: propertiesOk,
+          totalProperties: rows.length,
+        },
+               
+      };
+      
+      //console.log("console: ", rows[0].title);
+      res.status(200).json(allMetrics);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    }
+ };
 
 //ready
 /* const getAllUsers = async (req, res) => {
@@ -83,5 +152,12 @@ export {
     //createUser,
     //getUserInfoByID,
 };
+
+
+
+
+
+
+
 
 
