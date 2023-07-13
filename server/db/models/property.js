@@ -31,7 +31,7 @@ const Property = sequelize.define('properties', {
   },
   photo: {
     type: DataTypes.STRING(255),
-    allowNull: false,
+    allowNull: true,
   },
   creator_id: {
     type: DataTypes.INTEGER,

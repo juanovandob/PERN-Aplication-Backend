@@ -1,6 +1,6 @@
 import User from '../db/models/user.js';
 import Property from '../db/models/property.js';
-import e from 'express';
+//import e from 'express';
 
 
 const getAllMetrics = async (req, res) => {
@@ -30,7 +30,7 @@ const getMetricsDetail = async (req, res) => {
       //getting the count of properties by user
       const {count, rows} = await Property.findAndCountAll({
         where: { creator_id: id },
-        attributes: ["id", "title", "description"],
+        attributes: ["id", "title", "description","photo"],
         order: [
           ['id', 'ASC'] // Orden ascendente por la columna 'id'
         ],
@@ -64,7 +64,17 @@ const getMetricsDetail = async (req, res) => {
           count: 0,
           propertiesList: [],
           },
-        }        
+        },
+        imageQuality: {
+          unhealthy:{
+          count: 0,
+          propertiesList: [],
+          },
+          healthy:{
+          count: 0,
+          propertiesList: [],
+          },
+        }          
       };  
      
 
@@ -75,7 +85,7 @@ const getMetricsDetail = async (req, res) => {
         }else{
           allMetrics.titleQuality.healthy.count++;
           allMetrics.titleQuality.healthy.propertiesList.push(property);
-        }
+        };
 
         if((property.description).length < 100){
           allMetrics.descriptionQuality.unhealthy.count++;
@@ -84,6 +94,17 @@ const getMetricsDetail = async (req, res) => {
           allMetrics.descriptionQuality.healthy.count++;
           allMetrics.descriptionQuality.healthy.propertiesList.push(property);
         };
+
+        if(property.image == ""){
+          allMetrics.imageQuality.unhealthy.count++;
+          allMetrics.imageQuality.unhealthy.propertiesList.push(property);
+        }else{
+          allMetrics.imageQuality.healthy.count++;
+          allMetrics.imageQuality.healthy.propertiesList.push(property);
+        };
+        console.log("fotos: ", property.photo);
+
+      //end of forEach  
       });
            
       

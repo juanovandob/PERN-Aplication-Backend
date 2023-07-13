@@ -33,7 +33,7 @@ const startServer = async () => {
         await sequelize.authenticate();
         console.log('Database connection has been established successfully.');
         //syncronizing database with models
-        //await sequelize.sync({ });  //-- solo es necesario cuando se cambia un modelo       
+        //await sequelize.sync({ alter : true });  //-- solo es necesario cuando se cambia un modelo       
         const port = process.env.PORT;
         app.listen(port, () => console.log(`started on port ${port}`));
     } catch (error) {
