@@ -165,7 +165,7 @@ const createProperty = async (req, res) => {
         //try {
         /* const { id } = req.params;  
         const { title, description, propertyType, location, price, photo } = req.body;
-        console.log(req.body);
+        
         
         const originalProperty = await Property.findByPk(id);
         

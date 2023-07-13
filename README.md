@@ -1,8 +1,13 @@
-# Full Stack MERN Application Node, Using Refine
+# PERN Application Node - PostgreSql - Sequelize
 
-Replica del proyecto realizado por Jascript Mastery de aplicación Full Stack. Por ser una réplica
+Refactorización utilizando base de datos PostgreSql con Sequelize y añadiendo endpoint de 
+métricas. 
+
+Proyecto original realizado por Javascript Master de aplicación Full Stack. Por ser una réplica
 con motivos de estudio, el código tiene cambios del original y varios comentarios para aprendizaje
 https://www.youtube.com/watch?v=k4lHXIzCEkM
+
+Unicamente se incluye el backend
 
 ## Tabla de contenidos
 
@@ -18,9 +23,6 @@ Instrucciones sobre cómo instalar y configurar el proyecto.
 
 Explicación de cómo utilizar el proyecto, ejemplos de código o capturas de pantalla.
 
-## Contribución
-
-Indicaciones para que otros colaboradores contribuyan al proyecto. Incluye información sobre cómo presentar problemas (issues) y enviar solicitudes de extracción (pull requests).
 
 ## Licencia
 
