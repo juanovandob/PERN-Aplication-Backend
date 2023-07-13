@@ -1,5 +1,6 @@
 import User from '../db/models/user.js';
 import Property from '../db/models/property.js';
+import e from 'express';
 
 
 const getAllMetrics = async (req, res) => {
@@ -15,6 +16,7 @@ const getMetricsDetail = async (req, res) => {
   
   const { id } = req.params;
   
+  
   try {
     const allMetrics = {};
     // Check if user id exists
@@ -25,51 +27,66 @@ const getMetricsDetail = async (req, res) => {
     });
 
     if(userExists){
-      /* // Find properties by creator_id (id usuario propietario)
-      const properties = await Property.findAll({
-        where: { creator_id: id }, 
-        raw: true,
-      })*/;
+      //getting the count of properties by user
       const {count, rows} = await Property.findAndCountAll({
         where: { creator_id: id },
-        attributes: ["id", "title"],
+        attributes: ["id", "title", "description"],
+        order: [
+          ['id', 'ASC'] // Orden ascendente por la columna 'id'
+        ],
         }) //return the count of objects and an ARRAY of objects
 
       
-      //getting the count of properties with titles less than 12 characters
-      let totalUnhealthy = 0;
-      let propertiesUnhealthy = [];
-      let totalHealthy = 0;
-      let propertiesOk = [];
-
-      for(const property of rows){
-        if((property.title).length < 12){
-          totalUnhealthy ++;
-          propertiesUnhealthy.push(property);
-        }else{
-        totalHealthy++;
-        propertiesOk.push(property);
-        }
-      }  
-
-      console.log('conteo', totalUnhealthy);
-
+      //Title Metrics, count of properties with titles less than 12 characters
+      //Description Metrics, count of properties with descriptions less than 100 characters
+      //bad and good ones
+      
       const allMetrics = {
         totalProperties: {
-          type: String,
-          value: count,
+          count,
         },
         titleQuality: {
-          totalUnhealthy,
-          propertiesUnhealthy,
-          totalHealthy,
-          propertiesHealthy: propertiesOk,
-          totalProperties: rows.length,
+          unhealthy:{
+          count: 0,
+          propertiesList: [],
+          },
+          healthy:{
+          count: 0,
+          propertiesList: [],
+          },
         },
-               
-      };
+        descriptionQuality: {
+          unhealthy:{
+          count: 0,
+          propertiesList: [],
+          },
+          healthy:{
+          count: 0,
+          propertiesList: [],
+          },
+        }        
+      };  
+     
+
+      rows.forEach((property) => {
+        if((property.title).length < 12){
+          allMetrics.titleQuality.unhealthy.count++;
+          allMetrics.titleQuality.unhealthy.propertiesList.push(property);
+        }else{
+          allMetrics.titleQuality.healthy.count++;
+          allMetrics.titleQuality.healthy.propertiesList.push(property);
+        }
+
+        if((property.description).length < 100){
+          allMetrics.descriptionQuality.unhealthy.count++;
+          allMetrics.descriptionQuality.unhealthy.propertiesList.push(property);
+        }else{
+          allMetrics.descriptionQuality.healthy.count++;
+          allMetrics.descriptionQuality.healthy.propertiesList.push(property);
+        };
+      });
+           
       
-      //console.log("console: ", rows[0].title);
       res.status(200).json(allMetrics);
     } else {
       res.status(404).json({ message: "User not found" });
@@ -80,77 +97,10 @@ const getMetricsDetail = async (req, res) => {
     }
  };
 
-//ready
-/* const getAllUsers = async (req, res) => {
-    
-    try {
-        const limit = parseInt(req.query._end) || undefined;
-    
-        // Buscar todos los usuarios --User ya es una instancia de sequelize
-        //por eso responde a los métodos de sequelize
-        const users = await User.findAll({
-          limit,
-          raw: true, // Para obtener solo los datos sin metadata adicional
-        });
-    
-        res.status(200).json(users);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-      }    
-};
-
-//ready
-const createUser = async (req, res) => {
-    try{
-        const { name, email, avatar} = req.body;
-
-        const userExists = await User.findOne({ where: { email }});
-                
-        if(userExists){
-            return res.status(200).json(userExists);
-        }
-        
-        const newUser = await User.create({
-            name,
-            email,
-            avatar,
-        });
-        
-        res.status(200).json(newUser); 
-    }catch(error){
-        res.status(500).json({ message: error.message })
-    }
-};
-
-//funciona en postman  -- falta en el front 
-const getUserInfoByID = async (req, res) => {
-    
-    try {
-        const { id } = req.params;
-    
-        // Buscar el usuario por su ID en Sequelize
-        const user = await User.findOne({
-          where: { id }, // Buscar por el campo 'id' en lugar de '_id'
-          //include: [{ model: Property, as: "allProperties" }],
-        });
-            
-        if (user) {
-          res.status(200).json(user);
-        } else {
-          res.status(404).json({ message: "User not found" });
-        }
-      } catch (error) {
-        res.status(500).json({ message: error.message });
-      }
-    
-}; */
-
+//export all the functions
 export {
     getAllMetrics,
     getMetricsDetail,
-    //getAllUsers,
-    //createUser,
-    //getUserInfoByID,
 };
 
 
