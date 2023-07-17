@@ -26,7 +26,9 @@ logs
 
 mern-dashboard-client/
 
+/server/config/
+
+*postgredatabase.sql
 server/config/
 
-server/config/
-*postgredatabase.sql
+postgredatabase.sql
