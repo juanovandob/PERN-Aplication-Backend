@@ -154,7 +154,7 @@ const getMetricsDetail = async (req, res) => {
 export { getAllMetrics, getMetricsDetail };
 
 
-//Luis refactor 
+// refactor 
 /* 
        const allMetrics = {
         totalProperties: {
