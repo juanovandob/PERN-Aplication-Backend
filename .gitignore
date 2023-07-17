@@ -28,4 +28,5 @@ mern-dashboard-client/
 
 server/config/
 
+server/config/
 *postgredatabase.sql
