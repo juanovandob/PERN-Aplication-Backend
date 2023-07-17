@@ -1,7 +1,0 @@
-{"_id":{"$oid":"649b8c38b678aa6804f9931a"},"name":"John 1","email":"john_email@gmail.com","avatar":"avatar_john","allProperties":[],"__v":{"$numberInt":"0"}}
-
-{"_id":{"$oid":"649b9c4a87eca197b63e537b"},"name":"Andrea 2","email":"andrea_email@gmail.com","avatar":"avatar_andrea","allProperties":[],"__v":{"$numberInt":"0"}}
-
-{"_id":{"$oid":"649c8048d8536a13f026002c"},"name":"Usario hoy","email":"correo hoy@gmail.com","avatar":"avatar hoy","allProperties":[],"__v":{"$numberInt":"0"}}
-
-{"_id":{"$oid":"649d02370bc87a9f65454762"},"name":"Juan Carlos Ovando","email":"juanovandomaestro@gmail.com","avatar":"https://lh3.googleusercontent.com/a/AAcHTtcJg3t9k8yTYpuUfOJhWChiw3zYAX3C_Fr9MrEHdjZPwQ=s96-c","allProperties":[{"$oid":"649e670083b0be55286c794c"},{"$oid":"649f24ea02b7b943d24d79a8"}],"__v":{"$numberInt":"14"}}
