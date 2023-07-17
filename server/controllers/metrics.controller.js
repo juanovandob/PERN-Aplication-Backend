@@ -46,37 +46,36 @@ const getMetricsDetail = async (req, res) => {
       //bad and good ones
 
       const allMetrics = {
-        totalProperties: {
-          count,
-        },
-        titleQuality: {
+        total: count,
+        
+        title: {
           unhealthy: {
-            count: 0,
-            propertiesList: [],
+            total: 0,
+            elements: [],
           },
           healthy: {
-            count: 0,
-            propertiesList: [],
+            total: 0,
+            elements: [],
           },
         },
-        descriptionQuality: {
+        description: {
           unhealthy: {
-            count: 0,
-            propertiesList: [],
+            total: 0,
+            elements: [],
           },
           healthy: {
-            count: 0,
-            propertiesList: [],
+            total: 0,
+            elements: [],
           },
         },
-        imageQuality: {
+        image: {
           unhealthy: {
-            count: 0,
-            propertiesList: [],
+            total: 0,
+            elements: [],
           },
           healthy: {
-            count: 0,
-            propertiesList: [],
+            total: 0,
+            elements: [],
           },
         },
         types: []       
@@ -88,30 +87,96 @@ const getMetricsDetail = async (req, res) => {
       const bridgeObject = {};
       const idsArray = [];
 
+
+      
+
+      console.log(rows);
       rows.forEach((property) => {
 
         if (property.title.length < 12) {
-          allMetrics.titleQuality.unhealthy.count++;
-          allMetrics.titleQuality.unhealthy.propertiesList.push(property);
+          allMetrics.title.unhealthy.total++;
+          const obj = {
+            id: property.id, 
+            title: property.title, 
+            description: property.description, 
+            photo: property.photo,
+            type:{
+              id:property.propertytypes_id, 
+              name:property['propertytype.name']
+            }
+          };
+          allMetrics.title.unhealthy.elements.push(obj);
+          //allMetrics.title.unhealthy.elements.push(property);
         } else {
-          allMetrics.titleQuality.healthy.count++;
-          allMetrics.titleQuality.healthy.propertiesList.push(property);
+          allMetrics.title.healthy.total++;
+          const obj = {
+            id: property.id, 
+            title: property.title, 
+            description: property.description, 
+            photo: property.photo,
+            type:{
+              id:property.propertytypes_id, 
+              name:property['propertytype.name']
+            }
+          };
+          allMetrics.title.healthy.elements.push(obj);
         }
+        
 
         if (property.description.length < 100) {
-          allMetrics.descriptionQuality.unhealthy.count++;
-          allMetrics.descriptionQuality.unhealthy.propertiesList.push(property);
+          allMetrics.description.unhealthy.total++;
+          const obj = {
+            id: property.id, 
+            title: property.title, 
+            description: property.description, 
+            photo: property.photo,
+            type:{
+              id:property.propertytypes_id, 
+              name:property['propertytype.name']
+            }
+          };
+          allMetrics.description.unhealthy.elements.push(obj);
         } else {
-          allMetrics.descriptionQuality.healthy.count++;
-          allMetrics.descriptionQuality.healthy.propertiesList.push(property);
+          allMetrics.description.healthy.total++;
+          const obj = {
+            id: property.id, 
+            title: property.title, 
+            description: property.description, 
+            photo: property.photo,
+            type:{
+              id:property.propertytypes_id, 
+              name:property['propertytype.name']
+            }
+          };
+          allMetrics.description.healthy.elements.push(obj);
         }
 
         if (property.image == "") {
-          allMetrics.imageQuality.unhealthy.count++;
-          allMetrics.imageQuality.unhealthy.propertiesList.push(property);
+          allMetrics.image.unhealthy.total++;
+          const obj = {
+            id: property.id, 
+            title: property.title, 
+            description: property.description, 
+            photo: property.photo,
+            type:{
+              id:property.propertytypes_id, 
+              name:property['propertytype.name']
+            }
+          };
+          allMetrics.image.unhealthy.elements.push(obj);
         } else {
-          allMetrics.imageQuality.healthy.count++;
-          allMetrics.imageQuality.healthy.propertiesList.push(property);
+          allMetrics.image.healthy.total++;
+          const obj = {
+            id: property.id, 
+            title: property.title, 
+            description: property.description, 
+            photo: property.photo,
+            type:{
+              id:property.propertytypes_id, 
+              name:property['propertytype.name']
+            }
+          };
+          allMetrics.image.healthy.elements.push(obj);
         }
 
         //adding the propertyType to the bridgeObject and adding the counts

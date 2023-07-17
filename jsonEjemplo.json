@@ -1,0 +1,240 @@
+{
+  "total": 6,
+  "title": {
+    "unhealthy": {
+      "total": 1,
+      "elements": [
+        {
+          "id": 5,
+          "title": "Asuncion",
+          "description": "cinco",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530630/sfpujfzw7csitvlyt4ue.png",
+          "property": {
+            "id": 1,
+            "name": "Studio"
+          }
+        }
+      ]
+    },
+    "healthy": {
+      "total": 5,
+      "elements": [
+        {
+          "id": 2,
+          "title": "Hotel la Mariposa",
+          "description": "SEGUNDA FOTO",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688529520/hsujpigfdifu0tismxkr.png",
+          "property": {
+            "id": 1,
+            "name": "Hotel"
+          }
+        },
+        {
+          "id": 4,
+          "title": "Se actualizo solo el campo del titulo y la descipcion",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vulputate tellus non nisi condimentum effi",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530250/vrqqztlu0bbkv8ockote.png",
+          "property": {
+            "id": 1,
+            "name": "Apartment"
+          }
+        },
+        {
+          "id": 6,
+          "title": "Hacienda Comalapa ",
+          "description": "Ubicada en la reserva natural, tierra del creador del Himno Nacional",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530976/zaqnzbwmyx9fwcukum1j.png",
+          "property": {
+            "id": 1,
+            "name": "Farmhouse"
+          }
+        },
+        {
+          "id": 9,
+          "title": "Estancia la Virgen",
+          "description": "Servicio personalizado a familias",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1689265930/sujscy7724zpeydnd2tx.png",
+          "property": {
+            "id": 1,
+            "name": "Hotel"
+          }
+        },
+        {
+          "id": 11,
+          "title": "Nueva Jerusalen",
+          "description": "Propiedad en las afueras de la ciudad",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1689272872/jwmsjb38noplmybadq7y.png",
+          "property": {
+            "id": 1,
+            "name": "Apartment"
+          }
+        }
+      ]
+    }
+  },
+  "description": {
+    "unhealthy": {
+      "total": 5,
+      "elements": [
+        {
+          "id": 2,
+          "title": "Hotel la Mariposa",
+          "description": "SEGUNDA FOTO",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688529520/hsujpigfdifu0tismxkr.png",
+          "property": {
+            "id": 1,
+            "name": "Hotel"
+          }
+        },
+        {
+          "id": 5,
+          "title": "Asuncion",
+          "description": "cinco",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530630/sfpujfzw7csitvlyt4ue.png",
+          "property": {
+            "id": 1,
+            "name": "Studio"
+          }
+        },
+        {
+          "id": 6,
+          "title": "Hacienda Comalapa ",
+          "description": "Ubicada en la reserva natural, tierra del creador del Himno Nacional",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530976/zaqnzbwmyx9fwcukum1j.png",
+          "property": {
+            "id": 1,
+            "name": "Farmhouse"
+          }
+        },
+        {
+          "id": 9,
+          "title": "Estancia la Virgen",
+          "description": "Servicio personalizado a familias",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1689265930/sujscy7724zpeydnd2tx.png",
+          "property": {
+            "id": 1,
+            "name": "Hotel"
+          }
+        },
+        {
+          "id": 11,
+          "title": "Nueva Jerusalen",
+          "description": "Propiedad en las afueras de la ciudad",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1689272872/jwmsjb38noplmybadq7y.png",
+          "property": {
+            "id": 1,
+            "name": "Apartment"
+          }
+        }
+      ]
+    },
+    "healthy": {
+      "total": 1,
+      "elements": [
+        {
+          "id": 4,
+          "title": "Se actualizo solo el campo del titulo y la descipcion",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vulputate tellus non nisi condimentum effi",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530250/vrqqztlu0bbkv8ockote.png",
+          "property": {
+            "id": 1,
+            "name": "Apartment"
+          }
+        }
+      ]
+    }
+  },
+  "image": {
+    "unhealthy": {
+      "total": 0,
+      "elements": []
+    },
+    "healthy": {
+      "total": 6,
+      "elements": [
+        {
+          "id": 2,
+          "title": "Hotel la Mariposa",
+          "description": "SEGUNDA FOTO",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688529520/hsujpigfdifu0tismxkr.png",
+          "property": {
+            "id": 1,
+            "name": "Hotel"
+          }
+        },
+        {
+          "id": 4,
+          "title": "Se actualizo solo el campo del titulo y la descipcion",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vulputate tellus non nisi condimentum effi",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530250/vrqqztlu0bbkv8ockote.png",
+          "property": {
+            "id": 1,
+            "name": "Apartment"
+          }
+        },
+        {
+          "id": 5,
+          "title": "Asuncion",
+          "description": "cinco",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530630/sfpujfzw7csitvlyt4ue.png",
+          "property": {
+            "id": 1,
+            "name": "Studio"
+          }
+        },
+        {
+          "id": 6,
+          "title": "Hacienda Comalapa ",
+          "description": "Ubicada en la reserva natural, tierra del creador del Himno Nacional",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1688530976/zaqnzbwmyx9fwcukum1j.png",
+          "property": {
+            "id": 1,
+            "name": "Farmhouse"
+          }
+        },
+        {
+          "id": 9,
+          "title": "Estancia la Virgen",
+          "description": "Servicio personalizado a familias",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1689265930/sujscy7724zpeydnd2tx.png",
+          "property": {
+            "id": 1,
+            "name": "Hotel"
+          }
+        },
+        {
+          "id": 11,
+          "title": "Nueva Jerusalen",
+          "description": "Propiedad en las afueras de la ciudad",
+          "photo": "http://res.cloudinary.com/dmxzcehyr/image/upload/v1689272872/jwmsjb38noplmybadq7y.png",
+          "property": {
+            "id": 1,
+            "name": "Apartment"
+          }
+        }
+      ]
+    }
+  },
+  "types": [
+    {
+      "id": 1,
+      "name": "Apartment",
+      "total": 2
+    },
+    {
+      "id": 2,
+      "name": "Hotel",
+      "total": 20
+    },
+    {
+      "id": 3,
+      "name": "Studio",
+      "total": 30
+    },
+    {
+      "id": 4,
+      "name": "Farmhouse",
+      "total": 40
+    }
+  ]
+} 
