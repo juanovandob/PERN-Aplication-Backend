@@ -17,8 +17,7 @@ CREATE TABLE properties (
 );
 
 -- insert user
-INSERT INTO users (name, email, avatar)
-VALUES ('Juan Carlos Ovando', 'juanovandomaestro@gmail.com', 'https://lh3.googleusercontent.com/a/AAcHTtcJg3t9k8yTYpuUfOJhWChiw3zYAX3C_Fr9MrEHdjZPwQ=s96-c');
+
 
 
 
